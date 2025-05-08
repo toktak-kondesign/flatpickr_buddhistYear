@@ -14,6 +14,30 @@
 ![default](https://cloud.githubusercontent.com/assets/11352152/14549370/3cadb750-028d-11e6-818d-c6a1bc6349fc.PNG)
 ![dark](https://cloud.githubusercontent.com/assets/11352152/14549372/3cbc8514-028d-11e6-8daf-ec1ba01c9d7e.PNG)
 
+#Config For Buddhist Year
+document.addEventListener("DOMContentLoaded", function () {
+    // ตั้งค่า flatpickr สำหรับ date picker
+    if (document.getElementById("datepicker1")) {
+        // สร้าง instance ของ Thai Buddhist Year plugin
+        const buddhistYearPlugin = window.thaiBuddhistYearDisplayPlugin();
+
+        const datepicker = flatpickr("#datepicker1", {
+            locale: "th",
+            dateFormat: "d/m/B", // เปลี่ยนจาก Y เป็น B เพื่อแสดงปีพุทธศักราช
+            disableMobile: true,
+            locale: {
+                firstDayOfWeek: 1,
+            },
+            plugins: [buddhistYearPlugin], // เพิ่ม plugin
+        });
+
+        // ตั้งค่าวันที่เริ่มต้นเป็นวันปัจจุบัน
+        let today = new Date();
+        datepicker.setDate(today);
+
+        // ไม่จำเป็นต้องใช้ convertToBuddhistYear อีก เพราะปลั๊กอินจัดการให้แล้ว
+    }
+  });
 
 ## Motivation
 Almost every large SPA or project involves date and time input. Browser's native implementations of those are inconsistent and limited in functionality. Most other libraries require you to pull in heavy dependencies like jQuery, Bootstrap, and moment.js. I wanted something that was good-looking out of the box, dependency-free, powerful, and extensible.
